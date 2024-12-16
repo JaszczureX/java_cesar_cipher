@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class CaesarCipher {
+public class Main {
 
     public static String encrypt(String text, int shift) {
         StringBuilder result = new StringBuilder();
@@ -9,16 +9,15 @@ public class CaesarCipher {
             char ch = text.charAt(i);
 
             if (Character.isLetter(ch)) {
-                char base = Character.isLowerCase(ch) ? 'a' : 'A';
+                char upper = Character.isLowerCase(ch) ? 'a' : 'A';
 
-                ch = (char) ((ch - base + shift) % 26 + base);
+                ch = (char) ((ch - upper + shift) % 26 + upper);
             }
             result.append(ch);
         }
         
         return result.toString();
     }
-
 
     public static String decrypt(String text, int shift) {
         return encrypt(text, 26 - shift); 
@@ -27,21 +26,16 @@ public class CaesarCipher {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Podaj tekst do zaszyfrowania ");
+        String text = scanner.nextLine();
 
-        System.out.println("Podaj klucz przesunięcia:");
+        System.out.println("Podaj klucz przesunięcia ");
         int shift = scanner.nextInt();
 
-        czytText();
-
         String encrypted = encrypt(text, shift);
-        System.out.println("Zaszyfrowany tekst: " + encrypted);
+        System.out.println("Zaszyfrowany tekst " + encrypted);
 
         String decrypted = decrypt(encrypted, shift);
-        System.out.println("Odszyfrowany tekst: " + decrypted);
-    }
-    
-    public static void czytText(){
-        System.out.println("Podaj tekts to zaszyfrowania:");
-        String text = scanner.nextLine();
+        System.out.println("Odszyfrowany tekst " + decrypted);
     }
 }
